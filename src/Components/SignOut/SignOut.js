@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import * as ROUTES from '../../Constants/Routes';
 
