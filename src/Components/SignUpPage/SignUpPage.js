@@ -66,7 +66,6 @@ class SignUpFormBase extends Component {
     username === '';
 
       return (
-        <div>
           <form onSubmit={this.onSubmit}>
             <TextField
               name="username"
@@ -112,7 +111,6 @@ class SignUpFormBase extends Component {
 
             {error && <p>{error.message}</p>}
           </form>
-        </div>
       );
     }
 }
