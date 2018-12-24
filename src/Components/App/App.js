@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 
+import Header from '../../Layouts/Header';
 import Navigation from '../Navigation/Navigation';
 import LandingPage from '../LandingPage/LandingPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
@@ -18,6 +19,7 @@ import * as ROUTES from '../../Constants/Routes';
 const App = () => (
   <Router>
     <div>
+      <Header />
       <Navigation />    
       <hr />
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
