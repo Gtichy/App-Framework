@@ -12,6 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 import SignOutButton from '../Components/SignOut/SignOut';
 import * as ROUTES from '../Constants/Routes';
+import { AuthUserContext } from '../Components/Session';
 
 const styles = {
   root: {
@@ -41,7 +42,11 @@ class Header extends Component {
     const open = Boolean(anchorEl);
   
   const ProfileMenu = () => (
-      <div>{this.props.authUser ? <MenuAuth /> : <MenuNonAuth />}</div>
+    <div>
+    <AuthUserContext.Consumer>
+          {authUser => authUser ? <MenuAuth /> : <MenuNonAuth />}
+    </AuthUserContext.Consumer>
+    </div>
   );
     
   const MenuAuth = () => (
@@ -86,7 +91,7 @@ class Header extends Component {
         <AppBar position="sticky">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Firebase Authentication
+              Garrett's Project
             </Typography>
             <ProfileMenu />
           </Toolbar>

@@ -2,9 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../Constants/Routes';
+import { AuthUserContext } from '../Session';
 
-const Navigation = ({ authUser }) => (
-  <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+const Navigation = () => (
+  <div>
+  <AuthUserContext.Consumer>
+    {authUser =>
+        authUser ? <NavigationAuth /> : <NavigationNonAuth />
+    }
+  </AuthUserContext.Consumer>
+  </div>
 );
 
 const NavigationAuth = () => (
