@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { BarChart, ExitToApp, Face, AccountCircle } from '@material-ui/icons';
+import { BarChart, ExitToApp, Face, AccountCircle, Settings, SupervisedUserCircle } from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -31,14 +31,20 @@ class Navigation extends Component {
     super(props);
 
     this.state = {
-      open: false,
+      userOpen: false,
+      adminOpen: false,
     };
   
   }
 
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+  handleUserClick = () => {
+    this.setState(state => ({ userOpen: !state.userOpen }));
   };
+
+  handleAdminClick = () => {
+    this.setState(state => ({ adminOpen: !state.adminOpen }));
+  };
+
 
   handleSignOut = () => {
     this.props.firebase.doSignOut();  
@@ -57,14 +63,36 @@ class Navigation extends Component {
           <ListItemText primary="Dashboard" />
         </ListItem>
         </Link>
-        <ListItem button onClick={this.handleClick}>
+        
+        <ListItem button onClick={this.handleAdminClick}>
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText inset primary="Settings" />
+            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.adminOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link style={{ textDecoration: 'none'}} to={ROUTES.USERS}>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <SupervisedUserCircle />
+                </ListItemIcon>
+                <ListItemText inset primary="Users" />
+              </ListItem>
+            </Link>
+          </List>
+        </Collapse>
+
+        
+        <ListItem button onClick={this.handleUserClick}>
           <ListItemIcon>
             <Face />
           </ListItemIcon>
           <ListItemText inset primary="Username" />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+        <Collapse in={this.state.userOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <Link style={{ textDecoration: 'none'}} to={ROUTES.ACCOUNT}>
               <ListItem button className={classes.nested}>
