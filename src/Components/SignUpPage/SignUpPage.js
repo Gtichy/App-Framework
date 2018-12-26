@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase/Context';
 import * as ROUTES from '../../Constants/Routes';
+import { SignInLink } from '../SignInPage/SignInPage';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -11,6 +12,7 @@ const SignUpPage = () => (
   <div>
     <h1>Sign Up</h1>
     <SignUpForm />
+    <SignInLink />
   </div>
 );
 
