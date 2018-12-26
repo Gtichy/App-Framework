@@ -49,33 +49,6 @@ class Navigation extends Component {
     return (
       <div>
       <List component="nav">
-      <ListItem button onClick={this.handleClick}>
-              <ListItemIcon>
-                <Face />
-              </ListItemIcon>
-              <ListItemText inset primary="Username" />
-              {this.state.open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-              <Link style={{ textDecoration: 'none'}} to={ROUTES.ACCOUNT}>
-                <ListItem button className={classes.nested}>
-                  <ListItemIcon>
-                    <AccountCircle />
-                  </ListItemIcon>
-                  <ListItemText inset primary="Account" />
-                </ListItem>
-                </Link>
-                <Link style={{ textDecoration: 'none'}} to={ROUTES.SIGN_IN} onClick={this.handleSignOut}>
-                <ListItem button className={classes.nested}>
-                  <ListItemIcon>
-                    <ExitToApp />
-                  </ListItemIcon>
-                  <ListItemText inset primary="Sign Out" />
-                </ListItem>
-                </Link>
-              </List>
-            </Collapse>
         <Link style={{ textDecoration: 'none'}} to={ROUTES.HOME}>
         <ListItem button>
           <ListItemIcon>
@@ -84,6 +57,34 @@ class Navigation extends Component {
           <ListItemText primary="Dashboard" />
         </ListItem>
         </Link>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemIcon>
+            <Face />
+          </ListItemIcon>
+          <ListItemText inset primary="Username" />
+            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link style={{ textDecoration: 'none'}} to={ROUTES.ACCOUNT}>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <AccountCircle />
+                </ListItemIcon>
+                <ListItemText inset primary="Account" />
+              </ListItem>
+            </Link>
+            <Link style={{ textDecoration: 'none'}} to={ROUTES.SIGN_IN} onClick={this.handleSignOut}>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <ExitToApp />
+                </ListItemIcon>
+                <ListItemText inset primary="Sign Out" />
+              </ListItem>
+            </Link>
+          </List>
+        </Collapse>
+
       </List>    
       </div>
     
