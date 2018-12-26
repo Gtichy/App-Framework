@@ -9,7 +9,6 @@ import './App.css';
 import Layout from '../../Layouts/index';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import SignInPage from '../SignInPage/SignInPage';
-import PasswordForgetPage from '../PasswordForgetPage/PasswordForgetPage';
 import Homepage from '../Homepage/Homepage';
 import AccountPage from '../AccountPage/AccountPage';
 import AdminPage from '../AdminPage/AdminPage';
@@ -45,7 +44,6 @@ const NotLoggedIn = () => (
   <div>
     <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
     <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-    <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
   </div>  
 </Router>  
 )
