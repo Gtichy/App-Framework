@@ -30,7 +30,7 @@ const styles = {
     fontSize: 30,
     textAlign: 'center',
   },
-  emailInput: {
+  Input: {
     width: '100%',
   }
 };
@@ -75,7 +75,7 @@ class PasswordForgetFormBase extends Component {
       <p>Enter your email and press submit.</p>
       <form onSubmit={this.onSubmit}>
       <TextField
-              className={classes.emailInput}
+              className={classes.Input}
               name="email"
               value={email}
               onChange={this.onChange}
