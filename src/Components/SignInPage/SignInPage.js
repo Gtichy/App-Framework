@@ -26,7 +26,7 @@ const INITIAL_STATE = {
 
 const styles = {
   card: {
-    maxWidth: 300,
+    maxWidth: 320,
     margin: '0 auto',
     padding: 15, 
   },

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { withStyles } from '@material-ui/core/styles';
+
 import { withFirebase } from '../Firebase/Context';
 import * as ROUTES from '../../Constants/Routes';
 import { SignInLink } from '../SignInPage/SignInPage';
@@ -10,9 +14,7 @@ import Button from '@material-ui/core/Button';
 
 const SignUpPage = () => (
   <div>
-    <h1>Sign Up</h1>
     <SignUpForm />
-    <SignInLink />
   </div>
 );
 
@@ -23,6 +25,22 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
+
+const styles = {
+  card: {
+    maxWidth: 320,
+    margin: '0 auto',
+    padding: 15, 
+  },
+  title: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  Input: {
+    width: '100%',
+  }
+};
+
 
 class SignUpFormBase extends Component {
   constructor(props){
@@ -67,10 +85,17 @@ class SignUpFormBase extends Component {
     email === '' ||
     username === '';
 
+    const { classes } = this.props;
+
       return (
+          <div> 
+          <h1 className={classes.title}>Sign Up</h1>
+          <Card className={classes.card}>
+          <CardContent>    
           <form onSubmit={this.onSubmit}>
             <TextField
               name="username"
+              className={classes.Input}
               value={username}
               onChange={this.onChange}
               label="Username"
@@ -80,6 +105,7 @@ class SignUpFormBase extends Component {
             /><br />
             <TextField
               name="email"
+              className={classes.Input}              
               value={email}
               onChange={this.onChange}
               label="Email Address"
@@ -89,6 +115,7 @@ class SignUpFormBase extends Component {
             /><br />
             <TextField
               name="passwordOne"
+              className={classes.Input}              
               value={passwordOne}
               onChange={this.onChange}
               label="Password"
@@ -99,6 +126,7 @@ class SignUpFormBase extends Component {
               /><br />
             <TextField
               name="passwordTwo"
+              className={classes.Input}
               value={passwordTwo}
               onChange={this.onChange}
               label="Confirm Password"
@@ -113,6 +141,10 @@ class SignUpFormBase extends Component {
 
             {error && <p>{error.message}</p>}
           </form>
+          <SignInLink />
+          </CardContent>
+          </Card>
+          </div>
       );
     }
 }
@@ -123,7 +155,7 @@ const SignUpLink = () => (
   </p>
 );
 
-const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+const SignUpForm = withRouter(withFirebase(withStyles(styles)(SignUpFormBase)));
 
 export default SignUpPage;
 export { SignUpForm, SignUpLink }
