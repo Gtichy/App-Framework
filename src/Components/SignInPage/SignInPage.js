@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
 
-import { PasswordForgetLink } from '../PasswordForgetPage/PasswordForgetPage';
+import PasswordForgetForm from '../PasswordForget/PasswordForget';
 import { SignUpLink } from '../SignUpPage/SignUpPage';
 import { withFirebase } from '../Firebase/Context';
 import * as ROUTES from '../../Constants/Routes';
@@ -107,7 +107,7 @@ class SignInFormBase extends Component {
         {error && <p>{error.message}</p>}
       </form>
       <SignUpLink />
-      <PasswordForgetLink />
+      <PasswordForgetForm />
 
       </CardContent>
       </Card>
