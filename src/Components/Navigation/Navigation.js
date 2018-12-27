@@ -12,7 +12,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { withFirebase } from '../Firebase/Context';
 import * as ROUTES from '../../Constants/Routes';
-import { AuthUserContext } from '../Session/';
 
 const styles = theme => ({
   root: {
