@@ -12,7 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 import SignOutButton from '../Components/SignOut/SignOut';
 import * as ROUTES from '../Constants/Routes';
-import { AuthUserContext } from '../Components/Session/Index';
+import { AuthUserContext } from '../Components/Session/';
 
 const styles = {
   root: {

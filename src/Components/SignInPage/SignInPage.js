@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import PasswordForgetForm from '../PasswordForget/PasswordForget';
 import { SignUpLink } from '../SignUpPage/SignUpPage';
-import { withFirebase } from '../Firebase/Context';
+import { withFirebase } from '../Firebase/';
 import * as ROUTES from '../../Constants/Routes';
 
 import TextField from '@material-ui/core/TextField';

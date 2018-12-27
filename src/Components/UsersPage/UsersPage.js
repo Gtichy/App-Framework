@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import { withFirebase } from '../Firebase/Context';
+import { withFirebase } from '../Firebase/';
 
 const styles = theme => ({
   root: {
