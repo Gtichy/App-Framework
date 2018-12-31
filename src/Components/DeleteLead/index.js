@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteLead } from '../../Actions';
+import { deleteLead } from '../../Store/Leads/actions'
 
 // Material UI
 import Button from '@material-ui/core/Button';

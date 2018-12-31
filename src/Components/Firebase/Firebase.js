@@ -23,12 +23,14 @@ const devConfig = {
 const config =
   process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 
+export const firebaseApp = app.initializeApp(config);
+export const firebaseAuth = firebaseApp.auth();
+export const firebaseDb = firebaseApp.database();
+
 class Firebase {
     constructor() {
-      app.initializeApp(config);
-
-      this.auth = app.auth();
-      this.db = app.database();
+      this.auth = firebaseAuth;
+      this.db = firebaseDb;
     }
 
     // *** Auth API 
@@ -47,16 +49,6 @@ class Firebase {
 
     doPasswordUpdate = password => 
       this.auth.currentUser.updatePassword(password);
-
-    doCreateLead = (leadId, leadName, leadEmail) => {
-      console.log(leadName + ' and ' + leadEmail);
-      var newPostKey = this.db.ref().child('/leads').push().key;
-      this.db.ref(`/leads/${newPostKey}`).set({name: leadName, email: leadEmail});
-    }
-
-    doFetchLeads = () => {
-
-    }
     
     // User API 
     user = uid => this.db.ref(`users/${uid}`);

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
-import { getLoggedInUser } from '../../Actions';
+import { getLoggedInUser } from '../../Store/Auth/actions';
 import PasswordForgetForm from '../PasswordForget/PasswordForget';
 import { SignUpLink } from '../SignUpPage/SignUpPage';
 import { withFirebase } from '../Firebase/';
@@ -123,6 +123,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getLoggedInUser   })(withStyles(styles)(withRouter(withFirebase(SignInPage))));
+export default connect(mapStateToProps, { getLoggedInUser  })(withStyles(styles)(withRouter(withFirebase(SignInPage))));
 
 export { SignInLink } 

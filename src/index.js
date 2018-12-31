@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './Components/App/App';
-import reducers from './Reducers';
+import reducers from './Store';
 import Firebase, { FirebaseContext } from './Components/Firebase/';
 
 import * as serviceWorker from './serviceWorker';

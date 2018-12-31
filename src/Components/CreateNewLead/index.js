@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createLead } from '../../Actions';
+import { createLead } from '../../Store/Leads/actions';
 
 import { withFirebase } from '../Firebase/';
 
@@ -33,12 +33,10 @@ class CreateNewLead extends Component {
         const { newLeadName, newLeadEmail } = this.state;
 
         const uniqueId = Math.random().toString(36).substr(2, 9);
-        this.props.firebase
-            .doCreateLead(uniqueId,newLeadName, newLeadEmail)
         this.props.createLead(
             uniqueId,
-            this.state.newLeadName,
-            this.state.newLeadEmail
+            newLeadName,
+            newLeadEmail
         );
 
     }

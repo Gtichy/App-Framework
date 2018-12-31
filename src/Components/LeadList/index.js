@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { selectLead, fetchLeads } from '../../Actions';
+import { selectLead, fetchLeads } from '../../Store/Leads/actions';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -32,7 +32,7 @@ class LeadList extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchLeads();
     }
 

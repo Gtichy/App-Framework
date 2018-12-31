@@ -1,11 +1,17 @@
-import Firebase from '../Components/Firebase';
+import { firebaseDb } from '../../Components/Firebase/Firebase.js'
 
 export const fetchLeads = () => {
-    console.log(Firebase);
     return async (dispatch) => {
-        const response = await Firebase.db.ref('leads').once('value');
-        
-        console.log(dispatch({ type: "FETCH_LEADS", payload: response}));
+        const leads = [];
+
+        firebaseDb.ref('/leads').once('value', snap => {
+            snap.forEach(lead => {
+                let item = lead.val();
+                leads.push(item)
+            })
+        });
+
+        dispatch({type: 'FETCH_LEADS', payload: leads})
     }
 }
 
@@ -16,19 +22,11 @@ export const selectLead = (lead) => {
     };
 };
 
-export const getLoggedInUser = (isAuth, userId, userName, userEmail) => {
-    return {
-        type: 'GET_LOGGED_IN_USER',
-        payload: {
-            isAuth: isAuth,
-            userId: userId,
-            userName: userName,
-            userEmail: userEmail
-        }
-    }
-}
-
 export const createLead = (leadId, leadName, leadEmail) => {
+
+    var newPostKey = firebaseDb.ref().child('/leads').push().key;
+    firebaseDb.ref(`/leads/${newPostKey}`).set({leadId: leadId, leadName: leadName, leadEmail: leadEmail});
+  
     return {
         type: 'CREATE_LEAD',
         payload: {
