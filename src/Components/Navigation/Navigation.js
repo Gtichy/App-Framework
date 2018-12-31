@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { BarChart, ExitToApp, Face, AccountCircle, Settings, SupervisedUserCircle } from '@material-ui/icons';
+import { BarChart, ExitToApp, Face, AccountCircle, Settings, SupervisedUserCircle, People } from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -60,6 +60,14 @@ class Navigation extends Component {
               <BarChart />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
+        </ListItem>
+        </Link>
+        <Link style={{ textDecoration: 'none'}} to={ROUTES.LEADS}>
+        <ListItem button>
+          <ListItemIcon>
+              <People />
+          </ListItemIcon>
+          <ListItemText primary="Leads" />
         </ListItem>
         </Link>
         

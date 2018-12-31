@@ -8,7 +8,9 @@ import Homepage from '../Homepage/Homepage';
 import AccountPage from '../AccountPage/AccountPage';
 import AdminPage from '../AdminPage/AdminPage';
 import UsersPage from '../UsersPage/UsersPage';
-  
+import LeadList from '../LeadList';
+import LeadDetail from '../LeadDetail';
+
 import * as ROUTES from '../../Constants/Routes';
 import { withFirebase } from '../Firebase';
 import { AuthUserContext } from '../Session';
@@ -46,6 +48,8 @@ class App extends Component {
         <Route path={ROUTES.USERS} component={UsersPage} />  
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />  
+        <Route path={ROUTES.LEADS} component={LeadList} />
+        <Route path={ROUTES.LEAD} component={LeadDetail} />
       </div>  
       </Layout>
     </Router>

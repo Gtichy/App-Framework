@@ -48,10 +48,23 @@ class Firebase {
     doPasswordUpdate = password => 
       this.auth.currentUser.updatePassword(password);
 
-    // User API 
+    doCreateLead = (leadId, leadName, leadEmail) => {
+      console.log(leadName + ' and ' + leadEmail);
+      var newPostKey = this.db.ref().child('/leads').push().key;
+      this.db.ref(`/leads/${newPostKey}`).set({name: leadName, email: leadEmail});
+    }
 
+    doFetchLeads = () => {
+
+    }
+    
+    // User API 
     user = uid => this.db.ref(`users/${uid}`);
     users = () => this.db.ref('users');
+
+    // Lead API
+    lead = lid => this.db.ref(`leads/${lid}`);
+    leads = () => this.db.ref('leads');
   }
 
   export default Firebase;

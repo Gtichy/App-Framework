@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
-
+import { getLoggedInUser } from '../../Actions';
 import PasswordForgetForm from '../PasswordForget/PasswordForget';
 import { SignUpLink } from '../SignUpPage/SignUpPage';
 import { withFirebase } from '../Firebase/';
@@ -11,12 +12,6 @@ import * as ROUTES from '../../Constants/Routes';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
-const SignInPage = () => (
-  <div>
-    <SignInForm />
-  </div>
-);
 
 const INITIAL_STATE = {
   email: '',
@@ -40,7 +35,7 @@ const styles = {
 };
 
 
-class SignInFormBase extends Component {
+class SignInPage extends Component {
   constructor(props){
     super(props);
 
@@ -48,19 +43,19 @@ class SignInFormBase extends Component {
   }
 
   onSubmit = event => {
-    console.log('we are signing in!');
     const { email, password } = this.state;
-    
+
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
+        this.props.getLoggedInUser(true, ' ',' ', email);
       })
       .catch(error => {
         this.setState({ error });
       });
-
+      
       event.preventDefault();
   };
 
@@ -122,7 +117,12 @@ const SignInLink = () => (
   </p>
 );
 
-const SignInForm = withRouter(withFirebase(withStyles(styles)(SignInFormBase)));
+const mapStateToProps = (state) => {
+  return {
+    loggedInUser: state.loggedInUser
+  }
+}
 
-export default SignInPage;
-export { SignInForm, SignInLink } 
+export default connect(mapStateToProps, { getLoggedInUser   })(withStyles(styles)(withRouter(withFirebase(SignInPage))));
+
+export { SignInLink } 
