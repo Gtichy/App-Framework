@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { selectLead, fetchLeads } from '../../Store/Leads/actions';
+import { 
+    selectLead, 
+    fetchLeads, 
+    updateLeadStatus 
+} from '../../Store/Leads/actions';
 
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -32,13 +39,18 @@ class LeadList extends Component {
         }
     }
 
+    handleStatusChange = (id) => (e) => {
+        this.props.updateLeadStatus(id, e.target.value); 
+    }
+
     componentDidMount() {
         this.props.fetchLeads();
     }
 
     render() {
-        const sortedList = this.props.leads.sort(this.sortList('leadName'));
-        if(sortedList.length < 1){
+        const list = this.props.leads;
+        const sortedList = list.sort(this.sortList('leadName'));
+        if(list.length < 1){
             return (
                 <div>
                     <p>please create a lead</p>
@@ -69,7 +81,22 @@ class LeadList extends Component {
                                 <TableCell>{lead.leadEmail}</TableCell>
                                 <TableCell>{lead.leadPhone}</TableCell>
                                 <TableCell></TableCell>
-                                <TableCell></TableCell>
+                                <TableCell>
+                                    <FormControl>
+                                        <Select
+                                            value={lead.leadStatus}
+                                            onChange={this.handleStatusChange(lead.leadId)}
+                                            name="leadStatus"
+                                        >
+                                        <MenuItem value=""><em>None</em></MenuItem>
+                                        <MenuItem value='New'>New</MenuItem>
+                                        <MenuItem value='Interested'>Interested</MenuItem>
+                                        <MenuItem value='Toured'>Toured</MenuItem>
+                                        <MenuItem value='Lost'>Lost</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </TableCell>
+                                
                                 <TableCell>
                                 <Route render={({ history }) => (
                                     <IconButton 
@@ -105,4 +132,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { selectLead, fetchLeads })(LeadList);
+export default connect(mapStateToProps, { selectLead, fetchLeads, updateLeadStatus })(LeadList);

@@ -19,6 +19,9 @@ const INITIAL_STATE = {
 };
 
 const styles = {
+  underline: {
+    textDecoration: 'underline'
+  },
   Input: {
     width: '100%',
   }
@@ -66,7 +69,7 @@ class PasswordChangeForm extends Component {
 
     return (
       <div>
-          <p><a href="#" onClick={this.handleClickOpen}>Change password</a></p>
+          <p className={classes.underline} onClick={this.handleClickOpen}>Change password</p>
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
