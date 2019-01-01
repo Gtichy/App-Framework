@@ -9,7 +9,9 @@ export const fetchLeads = () => {
                 let item = lead.val();
                 leads.push(item)
             })
-        })
+        }).catch(error => {
+            this.errorMessage = 'Error - ' + error.message
+          })
         dispatch({type: 'FETCH_LEADS', payload: leads})
     }
 }
@@ -23,6 +25,9 @@ export const selectLead = (lead) => {
 
 export const updateLeadStatus = (leadId, leadStatus) => {
         firebaseDb.ref(`/leads/${leadId}`).update({leadStatus: leadStatus})
+            .catch(error => {
+                this.errorMessage = 'Error - ' + error.message
+            })
 
         return {
             type: 'UPDATE_LEAD_STATUS',
@@ -34,10 +39,14 @@ export const updateLeadStatus = (leadId, leadStatus) => {
 }
 
 export const createLead = (leadId, leadName, leadEmail) => {
-
     var newPostKey = firebaseDb.ref().child('/leads').push().key;
-    firebaseDb.ref(`/leads/${newPostKey}`).set({leadId: newPostKey, leadName: leadName, leadEmail: leadEmail, leadStatus: 'New'});
-  
+    firebaseDb
+        .ref(`/leads/${newPostKey}`)
+        .set(
+            {leadId: newPostKey, leadName: leadName, leadEmail: leadEmail, leadStatus: 'New'}
+        ).catch(error => {
+            this.errorMessage = 'Error - ' + error.message
+        })
     return {
         type: 'CREATE_LEAD',
         payload: {
@@ -51,7 +60,10 @@ export const createLead = (leadId, leadName, leadEmail) => {
 
 export const deleteLead = (leadId) => {
 
-    firebaseDb.ref(`/leads/${leadId}`).remove();
+    firebaseDb.ref(`/leads/${leadId}`).remove()
+    .catch(error => {
+        this.errorMessage = 'Error - ' + error.message
+    })
     return {
         type: 'DELETE_LEAD',
         payload: {
