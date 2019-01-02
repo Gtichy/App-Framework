@@ -7,7 +7,8 @@ const types = {
 	DELETE_LEAD: 'DELETE_LEAD',
 	EDIT_LEAD: 'EDIT_LEAD',
 	FETCH_LEADS: 'FETCH_LEADS',
-	UPDATE_LEAD_STATUS: 'UPDATE_LEAD_STATUS'
+	UPDATE_LEAD_STATUS: 'UPDATE_LEAD_STATUS',
+	LEAD_UPDATED: 'LEAD_UPDATED'
 };
 
 export const leadsReducer = (state = initialState, action) => {
@@ -41,12 +42,14 @@ export const leadsReducer = (state = initialState, action) => {
 			}
 		}
 		case types.UPDATE_LEAD_STATUS: {
+			return state				
+		}
+		case types.LEAD_UPDATED: {
 			return {
 				...state,
-				list: state.list.map(list => 
-					list.leadId === action.payload.leadId ? { ...list, leadStatus: action.payload.leadStatus } : list
-				) 
-			};		
+				list: {
+					...state.list, [action.leadId]: action.payload }
+			}
 		}
 
 		default:

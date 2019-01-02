@@ -32,9 +32,7 @@ class CreateNewLead extends Component {
         this.setState({dialogOpen: false})
         const { newLeadName, newLeadEmail } = this.state;
 
-        const uniqueId = Math.random().toString(36).substr(2, 9);
         this.props.createLead(
-            uniqueId,
             newLeadName,
             newLeadEmail
         );

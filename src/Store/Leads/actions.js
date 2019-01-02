@@ -7,11 +7,25 @@ export const fetchLeads = () => {
             snap.forEach(lead => {
                 let item = lead.val();
                 leads.push(item)
+                subscribeToLeadUpdates(snap.key);
             })
         })
-         dispatch({type: 'FETCH_LEADS', payload: leads})
+        dispatch({type: 'FETCH_LEADS', payload: leads})
     }
 }
+
+export const subscribeToLeadUpdates = (leadId) => {
+    return async (dispatch) => {
+      firebaseDb.ref(`/leads/${leadId}`).on('child_changed', snap => {
+
+        dispatch({ type: 'LEAD_UPDATED', payload: {
+            leadId: leadId,
+            lead: snap.val()
+        }})    
+    })
+}
+}
+
 
 export const selectLead = (lead) => {
     return {
@@ -51,19 +65,17 @@ export const updateLeadStatus = (leadId, leadStatus) => {
         }
 }
 
-export const createLead = (leadId, leadName, leadEmail) => {
-    var newPostKey = firebaseDb.ref().child('/leads').push().key;
+export const createLead = (leadName, leadEmail) => {
     firebaseDb
-        .ref(`/leads/${newPostKey}`)
-        .set(
-            {leadId: newPostKey, leadName: leadName, leadEmail: leadEmail, leadStatus: 'New'}
+        .ref(`/leads`)
+        .push(
+            {leadName: leadName, leadEmail: leadEmail, leadStatus: 'New'}
         ).catch(error => {
             this.errorMessage = 'Error - ' + error.message
         })
     return {
         type: 'CREATE_LEAD',
         payload: {
-            leadId: newPostKey,
             leadName: leadName,
             leadEmail: leadEmail,
             leadStatus: 'New'

@@ -42,6 +42,7 @@ class LeadList extends Component {
     }
 
     render() {
+        console.log('YO PLEAES RENDER');
         const list = this.props.leads;
         const sortedList = list.sort(this.sortList('leadName'));
         if(list.length < 1){
@@ -109,7 +110,7 @@ class LeadList extends Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        leads: state.leadData.list
+        leads: state.leadData.list,
     }
 }
 
