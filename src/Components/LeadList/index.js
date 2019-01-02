@@ -7,9 +7,6 @@ import {
     updateLeadStatus 
 } from '../../Store/Leads/actions';
 
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -20,6 +17,7 @@ import { Pageview } from '@material-ui/icons';
 
 import CreateNewLead from '../CreateNewLead';
 import DeleteLead from '../DeleteLead';
+import LeadStatus from '../LeadStatus';
 
 class LeadList extends Component { 
     sortList = (property) => {
@@ -37,10 +35,6 @@ class LeadList extends Component {
                 return a[property].localeCompare(b[property]);
             }       
         }
-    }
-
-    handleStatusChange = (id) => (e) => {
-        this.props.updateLeadStatus(id, e.target.value); 
     }
 
     componentDidMount() {
@@ -82,21 +76,8 @@ class LeadList extends Component {
                                 <TableCell>{lead.leadPhone}</TableCell>
                                 <TableCell></TableCell>
                                 <TableCell>
-                                    <FormControl>
-                                        <Select
-                                            value={lead.leadStatus}
-                                            onChange={this.handleStatusChange(lead.leadId)}
-                                            name="leadStatus"
-                                        >
-                                        <MenuItem value=""><em>None</em></MenuItem>
-                                        <MenuItem value='New'>New</MenuItem>
-                                        <MenuItem value='Interested'>Interested</MenuItem>
-                                        <MenuItem value='Toured'>Toured</MenuItem>
-                                        <MenuItem value='Lost'>Lost</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </TableCell>
-                                
+                                    <LeadStatus leadId={lead.leadId} leadStatus={lead.leadStatus}/>  
+                                 </TableCell>                              
                                 <TableCell>
                                 <Route render={({ history }) => (
                                     <IconButton 

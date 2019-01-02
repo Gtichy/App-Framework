@@ -3,16 +3,13 @@ import { firebaseDb } from '../../Components/Firebase/Firebase.js'
 export const fetchLeads = () => {
     return async (dispatch) => {
         const leads = [];
-
         firebaseDb.ref('/leads').once('value', snap => {
             snap.forEach(lead => {
                 let item = lead.val();
                 leads.push(item)
             })
-        }).catch(error => {
-            this.errorMessage = 'Error - ' + error.message
-          })
-        dispatch({type: 'FETCH_LEADS', payload: leads})
+        })
+         dispatch({type: 'FETCH_LEADS', payload: leads})
     }
 }
 
@@ -22,6 +19,22 @@ export const selectLead = (lead) => {
         payload: lead
     };
 };
+
+export const editLead = (leadId, updates) => {
+    firebaseDb.ref(`/leads/${leadId}`).update({
+        leadName: updates.leadName,
+        leadEmail: updates.leadEmail,
+        leadPhone: updates.leadPhone,
+    })
+    .catch(error => {
+        this.errorMessage = 'Error - ' + error.message
+    })
+
+    return {
+        type: 'EDIT_LEAD',
+        payload: updates
+    }
+}
 
 export const updateLeadStatus = (leadId, leadStatus) => {
         firebaseDb.ref(`/leads/${leadId}`).update({leadStatus: leadStatus})
